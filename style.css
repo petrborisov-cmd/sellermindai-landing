@@ -169,7 +169,7 @@ a:hover {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: oklch(from var(--color-bg) l c h / 0.85);
+  background: color-mix(in srgb, var(--color-bg) 85%, transparent);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--color-divider);
@@ -269,23 +269,32 @@ a:hover {
 .mobile-nav {
   display: none;
   position: fixed;
-  inset: 64px 0 0 0;
-  z-index: 90;
+  top: 64px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
   background: var(--color-bg);
-  padding: var(--space-6) var(--space-4);
+  padding: var(--space-8) var(--space-6);
   border-top: 1px solid var(--color-divider);
+  overflow-y: auto;
 }
 .mobile-nav.open {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-1);
 }
 .mobile-nav a {
   font-size: var(--text-lg);
   color: var(--color-text);
   font-weight: 500;
-  padding: var(--space-2) 0;
+  padding: var(--space-3) 0;
   text-decoration: none;
+  border-bottom: 1px solid var(--color-divider);
+}
+.mobile-nav a:last-child {
+  border-bottom: none;
+  margin-top: var(--space-4);
 }
 
 /* ============================================================

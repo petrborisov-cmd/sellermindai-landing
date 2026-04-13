@@ -58,15 +58,16 @@
       </div>
     </div>
 
-    <!-- Mobile nav -->
-    <div class="mobile-nav" id="mobile-nav">
-      <a href="#agents" data-mobile-link>Агенты</a>
-      <a href="#how-it-works" data-mobile-link>Как работает</a>
-      <a href="#pricing" data-mobile-link>Тарифы</a>
-      <a href="#faq" data-mobile-link>FAQ</a>
-      <a href="#waitlist" class="btn btn-primary" data-mobile-link>Ранний доступ</a>
-    </div>
   </header>
+
+  <!-- Mobile nav (outside header to avoid stacking context issues) -->
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="#agents" data-mobile-link>Агенты</a>
+    <a href="#how-it-works" data-mobile-link>Как работает</a>
+    <a href="#pricing" data-mobile-link>Тарифы</a>
+    <a href="#faq" data-mobile-link>FAQ</a>
+    <a href="#waitlist" class="btn btn-primary" data-mobile-link>Ранний доступ</a>
+  </div>
 
   <main>
 
