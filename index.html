@@ -1,113 +1,491 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SellerMindAI — Скоро</title>
-  <meta name="description" content="AI-агенты для продавцов на Wildberries и Ozon. Скоро открытие.">
-  <meta property="og:title" content="SellerMindAI — Скоро">
-  <meta property="og:description" content="AI-агенты для автоматизации продаж на маркетплейсах">
+  <title>SellerMindAI — AI-агенты для продавцов на маркетплейсах</title>
+  <meta name="description" content="Автоматизируйте ценообразование, ответы на отзывы и рекламу на Wildberries и Ozon с помощью AI-агентов. Управление через Telegram.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="SellerMindAI — AI-агенты для продавцов на маркетплейсах">
+  <meta property="og:description" content="Автоматизируйте ценообразование, ответы на отзывы и рекламу на WB и Ozon. Управление через Telegram-бот.">
+  <meta property="og:type" content="website">
   <meta property="og:url" content="https://sellermindai.com">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta property="og:locale" content="ru_RU">
 
-    body {
-      background: #0a0a0a;
-      color: #fff;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 24px;
-    }
+  <!-- Fonts: Cabinet Grotesk (display) + Satoshi (body) from Fontshare -->
+  <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800&f[]=satoshi@300,400,500,600,700&display=swap" rel="stylesheet">
 
-    .wrap { max-width: 480px; }
+  <link rel="stylesheet" href="./base.css">
+  <link rel="stylesheet" href="./style.css">
 
-    .logo {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 48px;
-    }
-
-    .logo svg { width: 36px; height: 36px; }
-
-    .logo-text {
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-    }
-
-    .logo-text span { color: #22c55e; }
-
-    h1 {
-      font-size: clamp(28px, 6vw, 42px);
-      font-weight: 800;
-      letter-spacing: -1px;
-      line-height: 1.15;
-      margin-bottom: 16px;
-    }
-
-    p {
-      font-size: 17px;
-      color: #888;
-      line-height: 1.6;
-      margin-bottom: 40px;
-    }
-
-    .badge {
-      display: inline-block;
-      background: rgba(34, 197, 94, 0.1);
-      border: 1px solid rgba(34, 197, 94, 0.3);
-      color: #22c55e;
-      font-size: 13px;
-      font-weight: 600;
-      padding: 6px 16px;
-      border-radius: 100px;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
-
-    .tg {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 40px;
-      color: #555;
-      font-size: 14px;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .tg:hover { color: #22c55e; }
-  </style>
+  <!-- Favicon: inline SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none'%3E%3Crect width='32' height='32' rx='8' fill='%2322c55e'/%3E%3Cpath d='M10 21l6-10 6 10' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M16 11V7' stroke='white' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
 </head>
 <body>
-  <div class="wrap">
-    <div class="logo">
-      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="36" height="36" rx="8" fill="#22c55e"/>
-        <path d="M10 24 L18 10 L26 24" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        <path d="M13 20 L23 20" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
-      </svg>
-      <span class="logo-text">Seller<span>Mind</span>AI</span>
+
+  <!-- ============================================================
+       HEADER
+       ============================================================ -->
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <a href="#" class="logo" aria-label="SellerMindAI — На главную">
+        <!-- SVG Logo: Abstract "S" + upward arrow (growth) -->
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <rect width="32" height="32" rx="8" fill="currentColor" style="color: var(--color-primary)"/>
+          <path d="M10 21l6-10 6 10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M16 11V7" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-text">Seller<span>Mind</span>AI</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links" role="list">
+          <li><a href="#agents">Агенты</a></li>
+          <li><a href="#how-it-works">Как работает</a></li>
+          <li><a href="#pricing">Тарифы</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button class="theme-toggle" data-theme-toggle aria-label="Переключить тему">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        </button>
+        <button class="mobile-menu-btn" aria-label="Меню" aria-expanded="false" data-mobile-toggle>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
     </div>
 
-    <div class="badge">Скоро открытие</div>
+  </header>
 
-    <h1 style="margin-top:24px">AI-агенты для продавцов на маркетплейсах</h1>
-
-    <p>Автоматизация цен, отзывов и рекламы на Wildberries и Ozon. Управление через Telegram.</p>
-
-    <p style="font-size:15px; color:#444">Мы готовим сервис к запуску.<br>Следите за обновлениями.</p>
-
-    <a href="https://t.me/SellerMindAIBot" class="tg" target="_blank" rel="noopener noreferrer">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-2.04 9.613c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.08 14.4l-2.948-.924c-.64-.204-.654-.64.136-.954l11.52-4.44c.537-.194 1.006.131.774.166z"/>
-      </svg>
-      @SellerMindAIBot
-    </a>
+  <!-- Mobile nav (outside header to avoid stacking context issues) -->
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="#agents" data-mobile-link>Агенты</a>
+    <a href="#how-it-works" data-mobile-link>Как работает</a>
+    <a href="#pricing" data-mobile-link>Тарифы</a>
+    <a href="#faq" data-mobile-link>FAQ</a>
+    <a href="https://t.me/SellerMindAIBot" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Написать в Telegram</a>
   </div>
+
+  <main>
+
+    <!-- ============================================================
+         HERO
+         ============================================================ -->
+    <section class="hero section" id="hero">
+      <div class="container">
+        <div class="hero-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          Набираем ранних пользователей
+        </div>
+        <h1>AI&#8209;агенты для продавцов на&nbsp;маркетплейсах</h1>
+        <p class="hero-sub">Автоматизируйте ценообразование, ответы на&nbsp;отзывы и&nbsp;рекламные ставки на&nbsp;Wildberries и&nbsp;Ozon. Управляйте всем через&nbsp;Telegram&#8209;бот.</p>
+        <div class="hero-actions">
+          <a href="https://t.me/SellerMindAIBot" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">Написать в Telegram</a>
+          <a href="#agents" class="btn btn-outline btn-lg">Как это работает</a>
+        </div>
+        <div class="hero-platforms">
+          <span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 7l10 10M17 7L7 17"/></svg>
+            Wildberries
+          </span>
+          <span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>
+            Ozon
+          </span>
+          <span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Telegram
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PROBLEMS
+         ============================================================ -->
+    <section class="problems section" id="problems">
+      <div class="container">
+        <p class="section-label js-reveal">Проблема</p>
+        <h2 class="section-title js-reveal">Знакомые боли каждого селлера</h2>
+        <div class="problems-grid">
+
+          <div class="problem-card js-reveal">
+            <div class="problem-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="10"/></svg>
+            </div>
+            <h3>Ручное ценообразование</h3>
+            <p>Часы на мониторинг конкурентов и ручное обновление цен. Пока вы меняете одну, конкуренты уже изменили десять.</p>
+          </div>
+
+          <div class="problem-card js-reveal">
+            <div class="problem-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg>
+            </div>
+            <h3>Пропущенные отзывы</h3>
+            <p>Негативные отзывы без ответа снижают конверсию и рейтинг карточки. Ответить на сотни отзывов вручную — нереально.</p>
+          </div>
+
+          <div class="problem-card js-reveal">
+            <div class="problem-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 1 0 0 7h5a3.5 3.5 0 1 1 0 7H6"/></svg>
+            </div>
+            <h3>Слив рекламного бюджета</h3>
+            <p>Ставки в рекламных кампаниях требуют постоянной корректировки. Без автоматизации вы переплачиваете за каждый клик.</p>
+          </div>
+
+          <div class="problem-card js-reveal">
+            <div class="problem-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            </div>
+            <h3>Несколько платформ</h3>
+            <p>WB и Ozon — разные кабинеты, разные правила. Переключаться между ними отнимает время и приводит к ошибкам.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         AGENTS / SOLUTION
+         ============================================================ -->
+    <section class="section" id="agents">
+      <div class="container">
+        <p class="section-label js-reveal">Решение</p>
+        <h2 class="section-title js-reveal">Три AI-агента — один Telegram&#8209;бот</h2>
+        <p class="section-desc js-reveal">Каждый агент специализируется на своей задаче и работает 24/7. Все действия подтверждаются вами кнопками в Telegram.</p>
+
+        <div class="agents-grid">
+
+          <!-- Repricer -->
+          <div class="agent-card js-reveal">
+            <div class="agent-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 17l3-3h2l3 3"/><path d="M14 17l3-3h2l3 3"/><line x1="12" y1="22" x2="12" y2="2"/><polyline points="8 6 12 2 16 6"/></svg>
+            </div>
+            <h3>Repricer</h3>
+            <p>Автоматическое ценообразование на основе данных конкурентов и ценового индекса Ozon.</p>
+            <ul class="agent-features" role="list">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Мониторинг цен конкурентов
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Учёт ценового индекса Ozon
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Оптимальные цены по вашей стратегии
+              </li>
+            </ul>
+          </div>
+
+          <!-- Reviews Agent -->
+          <div class="agent-card js-reveal">
+            <div class="agent-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            </div>
+            <h3>Reviews Agent</h3>
+            <p>Автоответы на отзывы покупателей. Персонализированные, вежливые, с учётом тона и контекста.</p>
+            <ul class="agent-features" role="list">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Персонализированные ответы AI
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Обработка негатива и претензий
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                WB и Ozon из одного окна
+              </li>
+            </ul>
+          </div>
+
+          <!-- PPC Bidder -->
+          <div class="agent-card js-reveal">
+            <div class="agent-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            </div>
+            <h3>PPC-биддер</h3>
+            <p>Управление ставками в рекламных кампаниях. Оптимизация по целевому CPC для максимальной прибыли.</p>
+            <ul class="agent-features" role="list">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Автоматическая оптимизация ставок
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Целевой CPC для каждой кампании
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Кампании WB и Ozon
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         HOW IT WORKS
+         ============================================================ -->
+    <section class="how-it-works section" id="how-it-works">
+      <div class="container">
+        <p class="section-label js-reveal">Как это работает</p>
+        <h2 class="section-title js-reveal">Три шага до автоматизации</h2>
+
+        <div class="steps-grid">
+          <div class="step-card js-reveal">
+            <div class="step-num">01</div>
+            <h3>Подключите маркетплейс</h3>
+            <p>Добавьте API-ключи WB или Ozon прямо в Telegram-боте. Это занимает 2 минуты.</p>
+          </div>
+          <div class="step-card js-reveal">
+            <div class="step-num">02</div>
+            <h3>Настройте стратегию</h3>
+            <p>Выберите агентов, задайте параметры: минимальные цены, тон ответов, целевой CPC.</p>
+          </div>
+          <div class="step-card js-reveal">
+            <div class="step-num">03</div>
+            <h3>Агенты работают 24/7</h3>
+            <p>AI-агенты мониторят и действуют автоматически. Вы подтверждаете ключевые решения кнопками в Telegram.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PRICING
+         ============================================================ -->
+    <section class="pricing section" id="pricing">
+      <div class="container">
+        <p class="section-label js-reveal">Тарифы</p>
+        <h2 class="section-title js-reveal">Простое и понятное ценообразование</h2>
+
+        <div class="pricing-grid">
+
+          <!-- Startup -->
+          <div class="pricing-card js-reveal">
+            <h3>Стартап</h3>
+            <div class="pricing-price">
+              <span class="pricing-amount">990 ₽</span>
+              <span class="pricing-period">/ мес</span>
+            </div>
+            <p class="pricing-desc">Для начинающих селлеров с одним магазином</p>
+            <ul class="pricing-features" role="list">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                1 магазин
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                1 платформа (WB или Ozon)
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Repricer — агент ценообразования
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                До 100 SKU
+              </li>
+            </ul>
+            <a href="https://t.me/SellerMindAIBot" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Написать в Telegram</a>
+          </div>
+
+          <!-- Business (featured) -->
+          <div class="pricing-card featured js-reveal">
+            <div class="pricing-badge">Рекомендуем</div>
+            <h3>Бизнес</h3>
+            <div class="pricing-price">
+              <span class="pricing-amount">2 990 ₽</span>
+              <span class="pricing-period">/ мес</span>
+            </div>
+            <p class="pricing-desc">Для растущих бизнесов на двух платформах</p>
+            <ul class="pricing-features" role="list">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                3 магазина
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                WB + Ozon
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Все 3 агента (Repricer + Reviews + PPC)
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                До 1 000 SKU
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Приоритетная поддержка
+              </li>
+            </ul>
+            <a href="https://t.me/SellerMindAIBot" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Написать в Telegram</a>
+          </div>
+
+          <!-- Enterprise -->
+          <div class="pricing-card js-reveal">
+            <h3>Enterprise</h3>
+            <div class="pricing-price">
+              <span class="pricing-amount">от 9 990 ₽</span>
+              <span class="pricing-period">/ мес</span>
+            </div>
+            <p class="pricing-desc">Для крупных продавцов с особыми требованиями</p>
+            <ul class="pricing-features" role="list">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Безлимит магазинов и SKU
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Кастомные стратегии ценообразования
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Выделенный менеджер
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                API-доступ
+              </li>
+            </ul>
+            <a href="#waitlist" class="btn btn-outline">Связаться</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FAQ
+         ============================================================ -->
+    <section class="faq section" id="faq">
+      <div class="container">
+        <p class="section-label js-reveal">Вопросы и ответы</p>
+        <h2 class="section-title js-reveal">Частые вопросы</h2>
+
+        <div class="faq-list">
+
+          <div class="faq-item js-reveal">
+            <button class="faq-question" aria-expanded="false">
+              Безопасно ли подключать API маркетплейса?
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p>Да. Мы используем только официальные API Wildberries и Ozon. Ваши ключи шифруются и хранятся в защищённом хранилище. Мы не имеем доступа к вашим финансовым данным и не можем выводить средства.</p>
+            </div>
+          </div>
+
+          <div class="faq-item js-reveal">
+            <button class="faq-question" aria-expanded="false">
+              Какие платформы поддерживаются?
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p>На старте — Wildberries и Ozon. Это две крупнейшие площадки российского e-commerce. Поддержку Яндекс Маркета и других платформ планируем добавить позже.</p>
+            </div>
+          </div>
+
+          <div class="faq-item js-reveal">
+            <button class="faq-question" aria-expanded="false">
+              Нужен ли программист для настройки?
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p>Нет. Всё управление происходит через Telegram-бот @SellerMindAIBot. Подключение маркетплейса занимает 2 минуты: вставьте API-ключ — и агенты начнут работать. Никакого кода или технических навыков не нужно.</p>
+            </div>
+          </div>
+
+          <div class="faq-item js-reveal">
+            <button class="faq-question" aria-expanded="false">
+              Как подключить магазин?
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p>Откройте @SellerMindAIBot в Telegram, нажмите «Подключить магазин», выберите платформу (WB или Ozon) и вставьте API-ключ из личного кабинета продавца. Бот проверит подключение и предложит настроить агентов.</p>
+            </div>
+          </div>
+
+          <div class="faq-item js-reveal">
+            <button class="faq-question" aria-expanded="false">
+              Есть ли бесплатный период?
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p>Участники раннего доступа получат 14 дней бесплатного использования тарифа «Бизнес». Запишитесь в лист ожидания, чтобы не пропустить старт.</p>
+            </div>
+          </div>
+
+          <div class="faq-item js-reveal">
+            <button class="faq-question" aria-expanded="false">
+              Агенты сами меняют цены и ставки?
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p>Вы контролируете уровень автоматизации. По умолчанию агенты предлагают изменения и ждут вашего подтверждения кнопкой в Telegram. Для опытных пользователей доступен полностью автоматический режим с заданными лимитами.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         WAITLIST / CTA
+         ============================================================ -->
+    <section class="cta-section section" id="waitlist">
+      <div class="container">
+        <p class="section-label js-reveal">Ранний доступ</p>
+        <h2 class="section-title js-reveal">Запишитесь первыми</h2>
+        <p class="section-desc js-reveal" style="margin-inline: auto;">Оставьте контакты — мы напишем в Telegram, когда будет готово. Участники раннего доступа получат 14 дней бесплатно.</p>
+
+        <div class="js-reveal" style="margin-top: 2rem;">
+          <a href="https://t.me/SellerMindAIBot" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">Написать в Telegram</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <a href="#" class="logo" aria-label="SellerMindAI">
+          <svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <rect width="32" height="32" rx="8" fill="currentColor" style="color: var(--color-primary)"/>
+            <path d="M10 21l6-10 6 10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 11V7" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <span class="logo-text">Seller<span>Mind</span>AI</span>
+        </a>
+        <p class="footer-copy" style="margin-top: var(--space-2);">&copy; 2025 SellerMindAI. Все права защищены.</p>
+      </div>
+
+      <ul class="footer-links" role="list">
+        <li><a href="https://t.me/SellerMindAIBot" target="_blank" rel="noopener noreferrer">
+          <span style="display:inline-flex; align-items:center; gap:6px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0h-.056zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.492-1.302.48-.428-.012-1.252-.242-1.865-.442-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+            Telegram-бот
+          </span>
+        </a></li>
+        <li><a href="mailto:petr.borisov@gmail.com">Написать нам</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="./app.js" defer></script>
 </body>
 </html>
